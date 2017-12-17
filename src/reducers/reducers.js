@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import { getCategories, getPosts } from '../utils/ReadableAPI'
 
 import {
+  RECEIVE_CATEGORIES,
   ADD_POST,
   VOTE_POST,
   EDIT_POST,
@@ -12,9 +13,20 @@ import {
   DELETE_COMMENT,
 } from '../actions/actions'
 
-console.log(getCategories())
+const initialCategoriesState = []
+const initialPostsState = []
+const initialCommentsState = []
 
-function posts (state = getPosts(), action) {
+function categories (state = initialCategoriesState, action) {
+  switch (action.type) {
+    case RECEIVE_CATEGORIES:
+      return action.categories
+    default :
+      return state
+  }
+}
+
+function posts (state = initialPostsState, action) {
   const { title, body, author, category } = action
 
   switch (action.type) {
@@ -27,7 +39,7 @@ function posts (state = getPosts(), action) {
   }
 }
 
-function comments (state = {}, action) {
+function comments (state = initialCommentsState, action) {
   const { title, body, author, category } = action
 
   switch (action.type) {
@@ -35,13 +47,6 @@ function comments (state = {}, action) {
       return {
         ...state
       }
-    default :
-      return state
-  }
-}
-
-function categories (state = getCategories(), action) {
-  switch (action.type) {
     default :
       return state
   }

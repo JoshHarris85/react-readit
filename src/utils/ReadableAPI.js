@@ -18,11 +18,13 @@ export const getPostsForCategory = (category) =>
 export const getCategories = () =>
   fetch(`${api}/categories`, { headers })
     .then(res => res.json())
+    .then(data => data.categories)
 
 // Posts
 export const getPosts = () =>
   fetch(`${api}/posts`, { headers })
     .then(res => res.json())
+    .then(data => data)
 
 export const createPost = (post) =>
   fetch(`${api}/posts`, {
