@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { orderBy, capitalize } from 'lodash';
 
 class Categories extends Component {
   render() {
     const { categories } = this.props
     return (
-      <div>
-        {categories && categories.map(category =>
-          <p key={category.name}>{category.name}</p>
+      <ul>
+        {orderBy(categories, 'name').map(category =>
+          <li key={capitalize(category.name)}>{capitalize(category.name)}</li>
         )}
-      </div>
+      </ul>
     )
   }
 }

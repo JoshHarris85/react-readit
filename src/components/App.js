@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchCategories, fetchPosts } from '../actions/actions'
 import Categories from './Categories.js'
 import Posts from './Posts.js'
+import './App.css';
 
 class App extends Component {
   componentWillMount(){
@@ -13,12 +14,9 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">React Readit</h1>
+          <Categories/>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Categories/>
         <Posts/>
       </div>
     );
