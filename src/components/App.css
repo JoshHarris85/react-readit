@@ -19,3 +19,13 @@ ul {
 .App-title {
   font-size: 1.5em;
 }
+
+.Post-Container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 10px;
+  background-color: #e0e0e0;
+}
