@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { fetchCategories } from '../actions/actions'
+import { fetchCategories, fetchPosts } from '../actions/actions'
 import Categories from './Categories.js'
+import Posts from './Posts.js'
 
 class App extends Component {
   componentWillMount(){
       this.props.getCategories()
+      this.props.getPosts()
   }
   render() {
     return (
@@ -14,9 +16,10 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
-        <Categories/>
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <Categories/>
+        <Posts/>
       </div>
     );
   }
@@ -28,6 +31,7 @@ class App extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   getCategories: () => dispatch(fetchCategories()),
+  getPosts: () => dispatch(fetchPosts())
 });
 
 

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import { getCategories, getPosts } from '../utils/ReadableAPI'
 
 import {
   RECEIVE_CATEGORIES,
+  RECEIVE_POSTS,
   ADD_POST,
   VOTE_POST,
   EDIT_POST,
@@ -30,6 +30,8 @@ function posts (state = initialPostsState, action) {
   const { title, body, author, category } = action
 
   switch (action.type) {
+    case RECEIVE_POSTS:
+      return action.posts
     case ADD_POST :
       return {
         ...state

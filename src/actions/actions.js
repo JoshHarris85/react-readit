@@ -1,6 +1,7 @@
-import { getCategories } from '../utils/ReadableAPI'
+import { getCategories, getPosts } from '../utils/ReadableAPI'
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
+export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const ADD_POST = 'ADD_POST'
 export const VOTE_POST = 'VOTE_POST'
 export const EDIT_POST = 'EDIT_POST'
@@ -19,6 +20,17 @@ export const receiveCategories = categories => (
 
 export const fetchCategories = () => dispatch => (
   getCategories().then(categories => dispatch(receiveCategories(categories)))
+)
+
+export const receivePosts = posts => (
+  {
+    type: RECEIVE_POSTS,
+    posts
+  }
+)
+
+export const fetchPosts = () => dispatch => (
+  getPosts().then(posts => dispatch(receivePosts(posts)))
 )
 
 export function addPost ({ title, body, author, category }) {
