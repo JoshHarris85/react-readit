@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faArrowUp, faArrowDown } from '@fortawesome/fontawesome-free-solid'
+import Moment from 'react-moment';
 
 class Posts extends Component {
   render() {
@@ -15,11 +16,12 @@ class Posts extends Component {
               <p>{post.voteScore}</p>
               <FontAwesomeIcon icon={faArrowDown} />
             </div>
-            <p>{post.title}</p>
-            <p>{post.timestamp}</p>
-            <p>{post.body}</p>
-            <p>{post.author}</p>
-            <p>{post.category}</p>
+            <div className="Post-Title">
+              {post.title}
+            </div>
+            <div className="Posted-By">
+              submitted at <Moment unix format="MM/DD/YYYY HH:mm">{post.timestamp}</Moment> by <b>{post.author}</b> to <b>{post.category}</b>
+            </div>
           </div>
         )}
       </div>
