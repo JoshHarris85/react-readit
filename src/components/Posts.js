@@ -24,6 +24,7 @@ class Posts extends Component {
             </div>
           </div>
         )}
+        <button className="New-Post">Create Post</button>
       </div>
     )
   }

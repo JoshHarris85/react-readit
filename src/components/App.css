@@ -11,7 +11,7 @@ ul {
 }
 
 .App-header {
-  background-color: #947474;
+  background-color: #7c8b94;
   padding: 20px;
   color: white;
 }
@@ -27,7 +27,6 @@ ul {
   border: 1px solid black;
   border-radius: 5px;
   margin: 10px;
-  background-color: #e0e0e0;
 }
 
 .Posted-By {
@@ -45,4 +44,16 @@ ul {
   align-self: center;
   text-align: left;
   padding-left: 40px;
+}
+
+.New-Post {
+  width: 90%;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #b8c2c7;
+  font-size: 130%;
+}
+
+.New-Post:hover {
+  background-color: #7c8b94;
 }
