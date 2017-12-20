@@ -5,6 +5,7 @@ import { faArrowUp, faArrowDown } from '@fortawesome/fontawesome-free-solid'
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { capitalize } from 'lodash';
+import { postUpVote, postDownVote } from '../actions/actions';
 
 class Posts extends Component {
   filteredPosts = () => {
@@ -24,9 +25,9 @@ class Posts extends Component {
         {posts && !posts.deleted && filteredPosts.map(post =>
           <div className="Post-Container" key={post.id}>
             <div className="Post-Voting-Container">
-              <FontAwesomeIcon icon={faArrowUp} />
+              <FontAwesomeIcon icon={faArrowUp} onClick={() => this.props.postUpVote(post.id, 'upVote')}/>
               <p>{post.voteScore}</p>
-              <FontAwesomeIcon icon={faArrowDown} />
+              <FontAwesomeIcon icon={faArrowDown} onClick={() => this.props.postDownVote(post.id, 'downVote')}/>
             </div>
             <div className="Post-Title">
               {post.title}
@@ -53,8 +54,14 @@ const mapStateToProps = (state, props) => ({
   posts: state.posts
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  postUpVote: (id, vote) => dispatch(postUpVote(id, vote)),
+  postDownVote: (id, vote) => dispatch(postDownVote(id, vote))
+});
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Posts)
 
 // const initialPostState = {

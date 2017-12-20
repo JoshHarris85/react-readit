@@ -4,7 +4,8 @@ import {
   RECEIVE_CATEGORIES,
   RECEIVE_POSTS,
   ADD_POST,
-  VOTE_POST,
+  UP_VOTE_POST,
+  DOWN_VOTE_POST,
   EDIT_POST,
   DELETE_POST,
   ADD_COMMENT,
@@ -27,15 +28,24 @@ function categories (state = initialCategoriesState, action) {
 }
 
 function posts (state = initialPostsState, action) {
-  const { title, body, author, category } = action
-
+  const { title, body, author, category, id } = action
   switch (action.type) {
     case RECEIVE_POSTS:
       return action.posts
-    case ADD_POST :
+    case ADD_POST:
       return {
         ...state
       }
+      case UP_VOTE_POST:
+        return [...state].map(post => {
+        	if (action.post.id == post.id) post.voteScore += 1;
+          return post
+        })
+      case DOWN_VOTE_POST:
+      return [...state].map(post => {
+        if (action.post.id == post.id) post.voteScore -= 1;
+        return post
+      })
     default :
       return state
   }
@@ -45,7 +55,7 @@ function comments (state = initialCommentsState, action) {
   const { title, body, author, category } = action
 
   switch (action.type) {
-    case ADD_COMMENT :
+    case ADD_COMMENT:
       return {
         ...state
       }

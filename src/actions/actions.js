@@ -1,9 +1,10 @@
-import { getCategories, getPosts } from '../utils/ReadableAPI'
+import { getCategories, getPosts, postVote } from '../utils/ReadableAPI'
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const ADD_POST = 'ADD_POST'
-export const VOTE_POST = 'VOTE_POST'
+export const DOWN_VOTE_POST = 'DOWN_VOTE_POST'
+export const UP_VOTE_POST = 'UP_VOTE_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const ADD_COMMENT = 'ADD_COMMENT'
@@ -43,13 +44,27 @@ export function addPost ({ title, body, author, category }) {
   }
 }
 
-export function votePost ({ id, vote }) {
-  return {
-    type: VOTE_POST,
-    id,
-    vote,
+export const setUpVotes = post => (
+  {
+    type: UP_VOTE_POST,
+    post
   }
-}
+)
+
+export const postUpVote = (id, vote) => dispatch => (
+  postVote(id, vote).then(post => dispatch(setUpVotes(post)))
+)
+
+export const setDownVotes = post => (
+  {
+    type: DOWN_VOTE_POST,
+    post
+  }
+)
+
+export const postDownVote = (id, vote) => dispatch => (
+  postVote(id, vote).then(post => dispatch(setDownVotes(post)))
+)
 
 export function editPost ({ id, title, body }) {
   return {
