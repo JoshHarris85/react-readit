@@ -3,13 +3,25 @@ import { connect } from 'react-redux'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faArrowUp, faArrowDown } from '@fortawesome/fontawesome-free-solid'
 import Moment from 'react-moment';
+import { Link } from 'react-router-dom';
+import { capitalize } from 'lodash';
 
 class Posts extends Component {
+  filteredPosts = () => {
+    if(this.props.posts && this.props.match && this.props.match.params && this.props.match.params.category && this.props.match.params.category != 'All'){
+      let category = this.props.match.params.category;
+      return this.props.posts.filter(post => capitalize(post.category) == capitalize(category))
+    }
+    else {
+      return this.props.posts
+    }
+  }
   render() {
     const { posts } = this.props
+    let filteredPosts = this.filteredPosts();
     return (
       <div className="Posts-Container">
-        {posts && !posts.deleted && posts.map(post =>
+        {posts && !posts.deleted && filteredPosts.map(post =>
           <div className="Post-Container" key={post.id}>
             <div className="Post-Voting-Container">
               <FontAwesomeIcon icon={faArrowUp} />
@@ -24,7 +36,14 @@ class Posts extends Component {
             </div>
           </div>
         )}
-        <button className="New-Post">Create Post</button>
+        <div className={ filteredPosts.length < 1 ? "No-Posts" : "hidden" }>
+          No Posts Found
+        </div>
+        <Link to={`/posts/new`}>
+          <button className="New-Post">
+            Create Post
+          </button>
+        </Link>
       </div>
     )
   }

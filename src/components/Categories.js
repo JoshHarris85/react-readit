@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { orderBy, capitalize } from 'lodash';
+import { Link } from 'react-router-dom';
 
 class Categories extends Component {
   render() {
@@ -8,7 +9,11 @@ class Categories extends Component {
     return (
       <ul>
         {orderBy(categories, 'name').map(category =>
-          <li key={capitalize(category.name)}>{capitalize(category.name)}</li>
+          <li key={capitalize(category.name)}>
+            <Link to={`/posts/${category.path}`} className="Nav-Links">
+              {capitalize(category.path)}
+            </Link>
+          </li>
         )}
       </ul>
     )

@@ -12,11 +12,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">React Readit</h1>
-          <Categories/>
-        </header>
+      <div>
         <Posts/>
       </div>
     );
