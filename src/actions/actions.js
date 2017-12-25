@@ -1,8 +1,9 @@
-import { getCategories, getPosts, postVote } from '../utils/ReadableAPI'
+import { getCategories, getPosts, postVote, createPost } from '../utils/ReadableAPI'
+import uuidv4 from 'uuid/v4';
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
-export const CREATE_POST = 'CREATE_POST'
+export const ADD_CREATED_POST = 'ADD_CREATED_POST'
 export const DOWN_VOTE_POST = 'DOWN_VOTE_POST'
 export const UP_VOTE_POST = 'UP_VOTE_POST'
 export const EDIT_POST = 'EDIT_POST'
@@ -12,6 +13,7 @@ export const VOTE_COMMENT = 'VOTE_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 
+// Getting initial categories
 export const receiveCategories = categories => (
   {
     type: RECEIVE_CATEGORIES,
@@ -23,6 +25,7 @@ export const fetchCategories = () => dispatch => (
   getCategories().then(categories => dispatch(receiveCategories(categories)))
 )
 
+// Getting initial Posts
 export const receivePosts = posts => (
   {
     type: RECEIVE_POSTS,
@@ -34,16 +37,28 @@ export const fetchPosts = () => dispatch => (
   getPosts().then(posts => dispatch(receivePosts(posts)))
 )
 
-export function createPost ({ title, body, author, category }) {
-  return {
-    type: CREATE_POST,
-    title,
-    body,
-    author,
-    category
-  }
-}
+// Creating posts
+export const addPost = (post) => dispatch => (
+  createPost(
+              {
+                id: uuidv4(),
+                timestamp: Date.now(),
+                title: post.title,
+                body: post.body,
+                author: post.author,
+                category: post.category
+              }
+            ).then(post => dispatch(addCreatedPost(post)))
+)
 
+export const addCreatedPost = post => (
+  {
+    type: ADD_CREATED_POST,
+    post
+  }
+)
+
+// Creating votes on a post
 export const setUpVotes = post => (
   {
     type: UP_VOTE_POST,
@@ -66,6 +81,7 @@ export const postDownVote = (id, vote) => dispatch => (
   postVote(id, vote).then(post => dispatch(setDownVotes(post)))
 )
 
+// Editing a post
 export function editPost ({ id, title, body }) {
   return {
     type: EDIT_POST,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
-import { createPost } from '../actions/actions';
+import { addPost } from '../actions/actions';
 
 const customStyles = {
   overlay : {
@@ -53,7 +53,6 @@ class NewPost extends Component {
   }
 
   update = e => {
-    console.log(this.state)
     this.setState({ ...this.state, form: {
       ...this.state.form,
       [e.target.name]: e.target.value
@@ -62,7 +61,7 @@ class NewPost extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.createPost(this.state.form)
+    this.props.addPost(this.state.form)
     this.closeModalAndClear()
   };
 
@@ -72,6 +71,7 @@ class NewPost extends Component {
   }
 
   render() {
+    const { categories } = this.props
     return (
       <div>
         <button className="New-Post" onClick={this.openModal}>
@@ -119,7 +119,7 @@ class NewPost extends Component {
                 ref={(input) => this.input = input}
                 onChange={this.update}
               >
-                {this.props.categories.map((category, index) => (
+                {categories.map((category, index) => (
                   <option key={index} value={category.name}>
                     {category.name}
                   </option>
@@ -152,7 +152,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  createPost: (title, body, author, category) => dispatch(createPost(title, body, author, category))
+  addPost: (title, body, author, category) => dispatch(addPost(title, body, author, category))
 });
 
 export default connect(

@@ -10,7 +10,7 @@ import NewPost from './NewPost';
 
 class Posts extends Component {
   filteredPosts = () => {
-    if(this.props.posts && this.props.match && this.props.match.params && this.props.match.params.category && this.props.match.params.category !== 'All'){
+    if(this.props.posts && this.props.match && this.props.match.params && this.props.match.params.category){
       let category = this.props.match.params.category;
       return this.props.posts.filter(post => capitalize(post.category) === capitalize(category))
     }

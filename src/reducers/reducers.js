@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux'
-import { createPost } from '../utils/ReadableAPI'
-import uuidv4 from 'uuid/v4';
 
 import {
   RECEIVE_CATEGORIES,
   RECEIVE_POSTS,
-  CREATE_POST,
+  ADD_CREATED_POST,
   UP_VOTE_POST,
   DOWN_VOTE_POST,
   EDIT_POST,
@@ -34,20 +32,8 @@ function posts (state = initialPostsState, action) {
   switch (action.type) {
     case RECEIVE_POSTS:
       return action.posts
-    case CREATE_POST:
-      const newPost = {
-        id: uuidv4(),
-        timestamp: Date.now(),
-        title: action.title,
-        body: action.body,
-        author: action.author,
-        category: action.category,
-        voteScore: 1,
-        deleted: false
-      };
-
-      createPost(newPost).then(posts => console.log(posts));
-
+    case ADD_CREATED_POST:
+      return [...state, action.post]
       case UP_VOTE_POST:
         return [...state].map(post => {
         	if (action.post.id == post.id) post.voteScore += 1;
