@@ -10,7 +10,7 @@ class Categories extends Component {
       <ul>
         {orderBy(categories, 'name').map(category =>
           <li key={capitalize(category.name)}>
-            <Link to={`/posts/${category.path}`} className="Nav-Links">
+            <Link to={`/${category.path}`} className="Nav-Links">
               {capitalize(category.path)}
             </Link>
           </li>

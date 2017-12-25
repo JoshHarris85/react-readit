@@ -3,6 +3,7 @@ import App from './components/App';
 import Categories from './components/Categories';
 import Posts from './components/Posts';
 import NewPost from './components/NewPost';
+import Post from './components/Post';
 import { Route, Switch, Link } from 'react-router-dom';
 
 export default () => (
@@ -16,8 +17,9 @@ export default () => (
 
     <Switch>
       <Route exact path="/" component={App} />
-      <Route path="/posts/:category" component={Posts} />
-      <Route path="/posts/new" component={NewPost} />
+      <Route exact path="/:category" component={Posts} />
+      <Route exact path="/posts/new" component={NewPost} />
+      <Route exact path="/:category/:id" component={Post} />
     </Switch>
   </div>
 );

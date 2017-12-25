@@ -30,7 +30,14 @@ class Posts extends Component {
               <FontAwesomeIcon icon={faArrowDown} onClick={() => this.props.postDownVote(post.id, 'downVote')}/>
             </div>
             <div className="Post-Title">
-              {post.title}
+              <Link to={`/${capitalize(post.category)}/${post.id}`} className="Post-Links">
+                {post.title}
+              </Link>
+            </div>
+            <div className="Post-Comments">
+              <Link to={`/${capitalize(post.category)}/${post.id}`} className="Post-Links">
+                Comments: {post.commentCount}
+              </Link>
             </div>
             <div className="Posted-By">
               submitted at <Moment unix format="MM/DD/YYYY HH:mm">{post.timestamp}</Moment> by <b>{post.author}</b> to <b>{post.category}</b>
