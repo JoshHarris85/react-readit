@@ -6,12 +6,13 @@ import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { capitalize } from 'lodash';
 import { postUpVote, postDownVote } from '../actions/actions';
+import NewPost from './NewPost';
 
 class Posts extends Component {
   filteredPosts = () => {
-    if(this.props.posts && this.props.match && this.props.match.params && this.props.match.params.category && this.props.match.params.category != 'All'){
+    if(this.props.posts && this.props.match && this.props.match.params && this.props.match.params.category && this.props.match.params.category !== 'All'){
       let category = this.props.match.params.category;
-      return this.props.posts.filter(post => capitalize(post.category) == capitalize(category))
+      return this.props.posts.filter(post => capitalize(post.category) === capitalize(category))
     }
     else {
       return this.props.posts
@@ -47,11 +48,7 @@ class Posts extends Component {
         <div className={ filteredPosts.length < 1 ? "No-Posts" : "hidden" }>
           No Posts Found
         </div>
-        <Link to={`/posts/new`}>
-          <button className="New-Post">
-            Create Post
-          </button>
-        </Link>
+        <NewPost/>
       </div>
     )
   }
@@ -70,14 +67,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Posts)
-
-// const initialPostState = {
-//   id: null,
-//   timestamp: Date.now(),
-//   title: null,
-//   body: null,
-//   author: null,
-//   category: null,
-//   voteScore: 1,
-//   deleted: false
-// }

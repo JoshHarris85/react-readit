@@ -84,3 +84,37 @@ ul {
 .hidden {
   display: none;
 }
+
+.Modal-Input-Container {
+  padding-top: 15px;
+}
+
+.Modal-Input-Container input,
+.Modal-Input-Container textarea,
+.Modal-Input-Container select {
+  width: 100%;
+  height: 25px;
+  font-size: 15px;
+}
+
+.Modal-Input-Container textarea {
+  margin: 0px;
+  height: 230px;
+}
+
+.Modal-Input-Container label {
+  font-weight: bold;
+}
+
+.Modal-Button {
+  width: 100%;
+  height: 30px;
+  border-radius: 20px;
+  background-color: #b8c2c7;
+  font-size: 100%;
+  margin-top: 10px;
+}
+
+.Modal-Button:hover {
+  background-color: #7c8b94;
+}
