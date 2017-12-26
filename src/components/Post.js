@@ -50,8 +50,14 @@ const mapStateToProps = (state, props) => ({
   posts: state.posts
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  postUpVote: (id, vote) => dispatch(postUpVote(id, vote)),
+  postDownVote: (id, vote) => dispatch(postDownVote(id, vote))
+});
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Post)
 
 // const initialPostState = {

@@ -1,4 +1,4 @@
-import { getCategories, getPosts, postVote, createPost, getPostComments } from '../utils/ReadableAPI'
+import { getCategories, getPosts, votePost, createPost, getPostComments, voteComment} from '../utils/ReadableAPI'
 import uuidv4 from 'uuid/v4';
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
@@ -6,6 +6,8 @@ export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const ADD_CREATED_POST = 'ADD_CREATED_POST'
 export const DOWN_VOTE_POST = 'DOWN_VOTE_POST'
 export const UP_VOTE_POST = 'UP_VOTE_POST'
+export const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT'
+export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT'
 export const EDIT_POST = 'EDIT_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const RECEIVE_POST_COMMENTS = 'RECEIVE_POST_COMMENTS'
@@ -71,27 +73,50 @@ export const addCreatedPost = post => (
   }
 )
 
-// Creating votes on a post
-export const setUpVotes = post => (
+// Creating upvotes on a post
+export const postUpVote = (id, vote) => dispatch => (
+  votePost(id, vote).then(post => dispatch(setPostUpVotes(post)))
+)
+
+export const setPostUpVotes = post => (
   {
     type: UP_VOTE_POST,
     post
   }
 )
-
-export const postUpVote = (id, vote) => dispatch => (
-  postVote(id, vote).then(post => dispatch(setUpVotes(post)))
+// Creating downvotes on a post
+export const postDownVote = (id, vote) => dispatch => (
+  votePost(id, vote).then(post => dispatch(setPostDownVotes(post)))
 )
 
-export const setDownVotes = post => (
+export const setPostDownVotes = post => (
   {
     type: DOWN_VOTE_POST,
     post
   }
 )
 
-export const postDownVote = (id, vote) => dispatch => (
-  postVote(id, vote).then(post => dispatch(setDownVotes(post)))
+// Creating upvotes on a comment
+export const commentUpVote = (id, vote) => dispatch => (
+  voteComment(id, vote).then(comment => dispatch(setCommentUpVotes(comment)))
+)
+
+export const setCommentUpVotes = comment => (
+  {
+    type: UP_VOTE_COMMENT,
+    comment
+  }
+)
+// Creating downvotes on a comment
+export const commentDownVote = (id, vote) => dispatch => (
+  voteComment(id, vote).then(comment => dispatch(setCommentDownVotes(comment)))
+)
+
+export const setCommentDownVotes = comment => (
+  {
+    type: DOWN_VOTE_COMMENT,
+    comment
+  }
 )
 
 // Editing a post
@@ -119,14 +144,6 @@ export function addComment ({ parentId, body, author }) {
     parentId,
     body,
     author,
-  }
-}
-
-export function voteComment ({ id, vote }) {
-  return {
-    type: VOTE_COMMENT,
-    id,
-    vote,
   }
 }
 

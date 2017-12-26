@@ -40,7 +40,7 @@ export const getPost = (id) =>
   fetch(`${api}/post/${id}`, { headers })
     .then(res => res.json())
 
-export const postVote = (id, vote) =>
+export const votePost = (id, vote) =>
   fetch(`${api}/posts/${id}`, {
     method: 'POST',
     headers: {

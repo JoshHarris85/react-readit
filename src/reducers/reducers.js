@@ -6,6 +6,8 @@ import {
   ADD_CREATED_POST,
   UP_VOTE_POST,
   DOWN_VOTE_POST,
+  UP_VOTE_COMMENT,
+  DOWN_VOTE_COMMENT,
   EDIT_POST,
   DELETE_POST,
   RECEIVE_POST_COMMENTS,
@@ -60,6 +62,16 @@ function comments (state = initialCommentsState, action) {
       return {
         ...state
       }
+    case UP_VOTE_COMMENT:
+      return [...state].map(comment => {
+        if (action.comment.id == comment.id) comment.voteScore += 1;
+        return comment
+      })
+    case DOWN_VOTE_COMMENT:
+    return [...state].map(comment => {
+      if (action.comment.id == comment.id) comment.voteScore -= 1;
+      return comment
+    })
     default :
       return state
   }
