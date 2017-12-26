@@ -6,6 +6,7 @@ import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { capitalize } from 'lodash';
 import { fetchPostComments } from '../actions/actions';
+import NewComment from './NewComment';
 
 class Comments extends Component {
   componentWillMount() {
@@ -34,6 +35,7 @@ class Comments extends Component {
         <div className={ comments.length < 1 ? "No-Comments" : "hidden" }>
           No Comments Found
         </div>
+        <NewComment/>
       </div>
     )
   }
