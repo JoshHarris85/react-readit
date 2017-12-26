@@ -1,4 +1,4 @@
-import { getCategories, getPosts, postVote, createPost } from '../utils/ReadableAPI'
+import { getCategories, getPosts, postVote, createPost, getPostComments } from '../utils/ReadableAPI'
 import uuidv4 from 'uuid/v4';
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
@@ -8,12 +8,17 @@ export const DOWN_VOTE_POST = 'DOWN_VOTE_POST'
 export const UP_VOTE_POST = 'UP_VOTE_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const DELETE_POST = 'DELETE_POST'
+export const RECEIVE_POST_COMMENTS = 'RECEIVE_POST_COMMENTS'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const VOTE_COMMENT = 'VOTE_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 
 // Getting initial categories
+export const fetchCategories = () => dispatch => (
+  getCategories().then(categories => dispatch(receiveCategories(categories)))
+)
+
 export const receiveCategories = categories => (
   {
     type: RECEIVE_CATEGORIES,
@@ -21,11 +26,11 @@ export const receiveCategories = categories => (
   }
 )
 
-export const fetchCategories = () => dispatch => (
-  getCategories().then(categories => dispatch(receiveCategories(categories)))
+// Getting initial posts
+export const fetchPosts = () => dispatch => (
+  getPosts().then(posts => dispatch(receivePosts(posts)))
 )
 
-// Getting initial Posts
 export const receivePosts = posts => (
   {
     type: RECEIVE_POSTS,
@@ -33,8 +38,16 @@ export const receivePosts = posts => (
   }
 )
 
-export const fetchPosts = () => dispatch => (
-  getPosts().then(posts => dispatch(receivePosts(posts)))
+// Getting comments for specific post
+export const fetchPostComments = (id) => dispatch => (
+  getPostComments(id).then(comments => dispatch(receivePostComments(comments)))
+)
+
+export const receivePostComments = comments => (
+  {
+    type: RECEIVE_POST_COMMENTS,
+    comments
+  }
 )
 
 // Creating posts

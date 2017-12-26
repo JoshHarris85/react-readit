@@ -21,7 +21,8 @@ ul {
   font-size: 1.5em;
 }
 
-.Post-Container {
+.Post-Container,
+.Comment-Container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -30,10 +31,10 @@ ul {
   margin: 10px;
 }
 
-.Posted-By {
+.Posted-By,
+.Comment-By {
   align-self: flex-end;
   padding-right: 15px;
-  flex: 1;
 }
 
 .Post-Comments {
@@ -41,12 +42,14 @@ ul {
   padding-right: 15px;
 }
 
-.Post-Voting-Container {
+.Post-Voting-Container,
+.Comment-Voting-Container {
   padding-left: 5px;
   text-align: center;
 }
 
-.Post-Title {
+.Post-Title,
+.Comment-Body {
   flex: 1;
   align-self: center;
   text-align: left;
@@ -75,7 +78,8 @@ ul {
   color: #b1abab;
 }
 
-.No-Posts {
+.No-Posts,
+.No-Comments {
   text-align: center;
   font-size: 20px;
   padding: 20px 0px 20px 0px;
@@ -117,4 +121,9 @@ ul {
 
 .Modal-Button:hover {
   background-color: #7c8b94;
+}
+
+.Comment-Header {
+  font-weight: bold;
+  text-align: center;
 }

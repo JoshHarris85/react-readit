@@ -6,40 +6,36 @@ import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { capitalize } from 'lodash';
 import { postUpVote, postDownVote } from '../actions/actions';
-import NewPost from './NewPost';
+import Comments from './Comments';
 
 class Post extends Component {
   filteredPost = () => {
     if(this.props.posts && this.props.match && this.props.match.params && this.props.match.params.id){
       return this.props.posts.filter(post => post.id === this.props.match.params.id && !post.deleted)
-      // this.props.posts.find(post => post.id === this.props.match.params.id && !post.deleted)
     }
   }
   render() {
     let filteredPost = this.filteredPost();
-    console.log(filteredPost[0])
     return (
       <div>
         { filteredPost.length === 1 && filteredPost.map(post =>
-          <div className="Post-Container" key={post.id}>
-            <div className="Post-Voting-Container">
-              <FontAwesomeIcon icon={faArrowUp} onClick={() => this.props.postUpVote(post.id, 'upVote')}/>
-              <p>{post.voteScore}</p>
-              <FontAwesomeIcon icon={faArrowDown} onClick={() => this.props.postDownVote(post.id, 'downVote')}/>
+          <div key={post.id}>
+            <div className="Post-Container">
+              <div className="Post-Voting-Container">
+                <FontAwesomeIcon icon={faArrowUp} onClick={() => this.props.postUpVote(post.id, 'upVote')}/>
+                <p>{post.voteScore}</p>
+                <FontAwesomeIcon icon={faArrowDown} onClick={() => this.props.postDownVote(post.id, 'downVote')}/>
+              </div>
+              <div className="Post-Title">
+                <Link to={`/${capitalize(post.category)}/${post.id}`} className="Post-Links">
+                  {post.title}
+                </Link>
+              </div>
+              <div className="Posted-By">
+                submitted at <Moment unix format="MM/DD/YYYY HH:mm">{post.timestamp}</Moment> by <b>{post.author}</b> to <b>{post.category}</b>
+              </div>
             </div>
-            <div className="Post-Title">
-              <Link to={`/${capitalize(post.category)}/${post.id}`} className="Post-Links">
-                {post.title}
-              </Link>
-            </div>
-            <div className="Post-Comments">
-              <Link to={`/${capitalize(post.category)}/${post.id}`} className="Post-Links">
-                Comments: {post.commentCount}
-              </Link>
-            </div>
-            <div className="Posted-By">
-              submitted at <Moment unix format="MM/DD/YYYY HH:mm">{post.timestamp}</Moment> by <b>{post.author}</b> to <b>{post.category}</b>
-            </div>
+            <Comments id={post.id} />
           </div>
           )}
         <div className={ filteredPost.length !== 1 ? "No-Posts" : "hidden" }>

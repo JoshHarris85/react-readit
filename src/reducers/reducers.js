@@ -8,6 +8,7 @@ import {
   DOWN_VOTE_POST,
   EDIT_POST,
   DELETE_POST,
+  RECEIVE_POST_COMMENTS,
   ADD_COMMENT,
   VOTE_COMMENT,
   EDIT_COMMENT,
@@ -53,6 +54,8 @@ function comments (state = initialCommentsState, action) {
   const { title, body, author, category } = action
 
   switch (action.type) {
+    case RECEIVE_POST_COMMENTS:
+      return action.comments
     case ADD_COMMENT:
       return {
         ...state
