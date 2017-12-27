@@ -39,23 +39,25 @@ function posts (state = initialPostsState, action) {
       return action.posts
     case ADD_CREATED_POST:
       return [...state, action.post]
-      case UP_VOTE_POST:
-        return [...state].map(post => {
-        	if (action.post.id == post.id) post.voteScore += 1;
-          return post
-        })
-      case DOWN_VOTE_POST:
+    case DELETE_POST:
+      return [...state].filter(post => post.id !== action.post.id)
+    case UP_VOTE_POST:
+      return [...state].map(post => {
+      	if (action.post.id == post.id) post.voteScore += 1;
+        return post
+      })
+    case DOWN_VOTE_POST:
       return [...state].map(post => {
         if (action.post.id == post.id) post.voteScore -= 1;
         return post
       })
-      case SORT_POSTS:
-        switch(action.sort){
-          case 'score ascending': return orderBy([...state], ['voteScore'], ['asc']);
-          case 'score descending': return orderBy([...state], ['voteScore'], ['desc']);
-          case 'time ascending': return orderBy([...state], ['timestamp'], ['asc']);
-          case 'time descending': return orderBy([...state], ['timestamp'], ['desc']);
-        }
+    case SORT_POSTS:
+      switch(action.sort){
+        case 'score ascending': return orderBy([...state], ['voteScore'], ['asc']);
+        case 'score descending': return orderBy([...state], ['voteScore'], ['desc']);
+        case 'time ascending': return orderBy([...state], ['timestamp'], ['asc']);
+        case 'time descending': return orderBy([...state], ['timestamp'], ['desc']);
+      }
     default :
       return state
   }

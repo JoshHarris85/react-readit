@@ -1,4 +1,4 @@
-import { getCategories, getPosts, votePost, createPost, getPostComments, voteComment} from '../utils/ReadableAPI'
+import { getCategories, getPosts, votePost, createPost, getPostComments, voteComment, deletePost } from '../utils/ReadableAPI'
 import uuidv4 from 'uuid/v4';
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
@@ -74,6 +74,18 @@ export const addCreatedPost = post => (
   }
 )
 
+// Delete post
+export const removePost = (id) => dispatch => (
+  deletePost(id).then(post => dispatch(removeDeletedPost(post)))
+)
+
+export const removeDeletedPost = post => (
+  {
+    type: DELETE_POST,
+    post
+  }
+)
+
 // Creating upvotes on a post
 export const postUpVote = (id, vote) => dispatch => (
   votePost(id, vote).then(post => dispatch(setPostUpVotes(post)))
@@ -85,6 +97,7 @@ export const setPostUpVotes = post => (
     post
   }
 )
+
 // Creating downvotes on a post
 export const postDownVote = (id, vote) => dispatch => (
   votePost(id, vote).then(post => dispatch(setPostDownVotes(post)))
@@ -120,6 +133,7 @@ export const setCommentDownVotes = comment => (
   }
 )
 
+// Sorting posts
 export function sortPosts (sort) {
   return {
     type: SORT_POSTS,
@@ -131,15 +145,6 @@ export function sortPosts (sort) {
 export function editPost ({ id, title, body }) {
   return {
     type: EDIT_POST,
-    id,
-    title,
-    body,
-  }
-}
-
-export function deletePost ({ id, title, body }) {
-  return {
-    type: DELETE_POST,
     id,
     title,
     body,

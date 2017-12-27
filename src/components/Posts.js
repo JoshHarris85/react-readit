@@ -8,6 +8,7 @@ import { capitalize } from 'lodash';
 import { postUpVote, postDownVote } from '../actions/actions';
 import NewPost from './NewPost';
 import SortSelect from './SortSelect';
+import DeletePost from './DeletePost';
 
 class Posts extends Component {
   filteredPosts = () => {
@@ -37,6 +38,7 @@ class Posts extends Component {
                 {post.title}
               </Link>
             </div>
+            <DeletePost id={post.id}/>
             <div className="Post-Comments">
               <Link to={`/${capitalize(post.category)}/${post.id}`} className="Post-Links">
                 Comments: {post.commentCount}
