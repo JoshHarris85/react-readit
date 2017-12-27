@@ -4,24 +4,27 @@ import { sortPosts } from '../actions/actions';
 
 class SortSelect extends Component {
   sort = e => {
-    console.log(e.target)
-    this.props.sortPosts(e.target.value)
+    this.props.sortPosts(e.target.value);
   }
+
   render() {
     return (
       <div className="Sort-Button-Container">
         <div className="Sort-Title"><b>Sort By:</b></div>
         <select className="Sort-Button" onChange={this.sort}>
-          <option default value="score descending">
+          <option default value="">
+            None
+          </option>
+          <option value="score descending">
             Vote Score | Descending
           </option>
-          <option default value="score ascending">
+          <option value="score ascending">
             Vote Score | Ascending
           </option>
-          <option default value="time descending">
+          <option value="time descending">
             Date | Descending
           </option>
-          <option default value="time ascending">
+          <option value="time ascending">
             Date | Ascending
           </option>
         </select>
