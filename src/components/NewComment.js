@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
-import { addPost } from '../actions/actions';
+import { addComment } from '../actions/actions';
 
 const customStyles = {
   overlay : {
@@ -33,10 +33,9 @@ class NewComment extends Component {
   state = {
     modalIsOpen: false,
     form: {
-      title: '',
       body: '',
       author: '',
-      category: 'React'
+      parentId: this.props.parentId
     }
   };
 
@@ -61,7 +60,7 @@ class NewComment extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.addPost(this.state.form)
+    this.props.addComment(this.state.form)
     this.closeModalAndClear()
   };
 
@@ -87,18 +86,6 @@ class NewComment extends Component {
 
           <form>
             <div className="Modal-Input-Container">
-              <label htmlFor="modal-title">Title:</label>
-              <input
-                id="modal-title"
-                name="title"
-                type="text"
-                defaultValue={this.state.form.title}
-                ref={(input) => this.input = input}
-                onChange={this.update}
-              />
-            </div>
-
-            <div className="Modal-Input-Container">
               <label htmlFor="modal-author">Author:</label>
               <input
                 id="modal-author"
@@ -108,23 +95,6 @@ class NewComment extends Component {
                 ref={(input) => this.input = input}
                 onChange={this.update}
               />
-            </div>
-
-            <div className="Modal-Input-Container">
-              <label htmlFor="modal-category">Category:</label>
-              <select
-                id="modal-category"
-                name="category"
-                defaultValue={this.state.form.category}
-                ref={(input) => this.input = input}
-                onChange={this.update}
-              >
-                {categories.map((category, index) => (
-                  <option key={index} value={category.name}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
             </div>
 
             <div className="Modal-Input-Container">
@@ -152,7 +122,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addPost: (title, body, author, category) => dispatch(addPost(title, body, author, category))
+  addComment: (title, body, author, category) => dispatch(addComment(title, body, author, category))
 });
 
 export default connect(

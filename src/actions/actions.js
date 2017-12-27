@@ -1,4 +1,4 @@
-import { getCategories, getPosts, votePost, createPost, getPostComments, voteComment, deletePost, deleteComment } from '../utils/ReadableAPI'
+import { getCategories, getPosts, votePost, createPost, getPostComments, voteComment, deletePost, deleteComment, createComment } from '../utils/ReadableAPI'
 import uuidv4 from 'uuid/v4';
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
@@ -12,7 +12,7 @@ export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT'
 export const EDIT_POST = 'EDIT_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const RECEIVE_POST_COMMENTS = 'RECEIVE_POST_COMMENTS'
-export const ADD_COMMENT = 'ADD_COMMENT'
+export const ADD_CREATED_COMMENT = 'ADD_CREATED_COMMENT'
 export const VOTE_COMMENT = 'VOTE_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
@@ -163,14 +163,25 @@ export function editPost ({ id, title, body }) {
   }
 }
 
-export function addComment ({ parentId, body, author }) {
-  return {
-    type: ADD_COMMENT,
-    parentId,
-    body,
-    author,
+// Creating comments
+export const addComment = (comment) => dispatch => (
+  createComment(
+                 {
+                   id: uuidv4(),
+                   timestamp: Date.now(),
+                   body: comment.body,
+                   author: comment.author,
+                   parentId: comment.parentId
+                 }
+               ).then(comment => dispatch(addCreatedComment(comment)))
+)
+
+export const addCreatedComment = comment => (
+  {
+    type: ADD_CREATED_COMMENT,
+    comment
   }
-}
+)
 
 export function editComment ({ id, body }) {
   return {

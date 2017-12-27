@@ -38,7 +38,7 @@ class Comments extends Component {
         <div className={ comments.length < 1 ? "No-Comments" : "hidden" }>
           No Comments Found
         </div>
-        <NewComment/>
+        <NewComment parentId={this.props.id}/>
       </div>
     )
   }

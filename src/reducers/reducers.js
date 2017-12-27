@@ -5,6 +5,7 @@ import {
   RECEIVE_CATEGORIES,
   RECEIVE_POSTS,
   ADD_CREATED_POST,
+  ADD_CREATED_COMMENT,
   UP_VOTE_POST,
   DOWN_VOTE_POST,
   EDIT_POST,
@@ -69,10 +70,8 @@ function comments (state = initialCommentsState, action) {
   switch (action.type) {
     case RECEIVE_POST_COMMENTS:
       return action.comments
-    case ADD_COMMENT:
-      return {
-        ...state
-      }
+    case ADD_CREATED_COMMENT:
+      return [...state, action.comment]
     case DELETE_COMMENT:
       return [...state].filter(comment => comment.id !== action.comment.id)
     case UP_VOTE_COMMENT:

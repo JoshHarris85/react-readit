@@ -33,7 +33,7 @@ export const createPost = (post) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify( post )
+    body: JSON.stringify(post)
   }).then(res => res.json())
 
 export const getPost = (id) =>
@@ -81,7 +81,7 @@ export const createComment = (comment) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ comment })
+    body: JSON.stringify(comment)
   }).then(res => res.json())
 
 export const getComment = (id) =>
