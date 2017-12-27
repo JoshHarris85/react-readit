@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { capitalize } from 'lodash';
 import { postUpVote, postDownVote } from '../actions/actions';
 import Comments from './Comments';
+import DeletePost from './DeletePost';
 
 class Post extends Component {
   filteredPost = () => {
@@ -31,6 +32,7 @@ class Post extends Component {
                   {post.title}
                 </Link>
               </div>
+              <DeletePost id={post.id}/>
               <div className="Posted-By">
                 submitted at <Moment unix format="MM/DD/YYYY HH:mm">{post.timestamp}</Moment> by <b>{post.author}</b> to <b>{post.category}</b>
               </div>

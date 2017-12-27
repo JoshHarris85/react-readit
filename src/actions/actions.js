@@ -1,4 +1,4 @@
-import { getCategories, getPosts, votePost, createPost, getPostComments, voteComment, deletePost } from '../utils/ReadableAPI'
+import { getCategories, getPosts, votePost, createPost, getPostComments, voteComment, deletePost, deleteComment } from '../utils/ReadableAPI'
 import uuidv4 from 'uuid/v4';
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
@@ -86,6 +86,18 @@ export const removeDeletedPost = post => (
   }
 )
 
+// Delete comment
+export const removeComment = (id) => dispatch => (
+  deleteComment(id).then(comment => dispatch(removeDeletedComment(comment)))
+)
+
+export const removeDeletedComment = comment => (
+  {
+    type: DELETE_COMMENT,
+    comment
+  }
+)
+
 // Creating upvotes on a post
 export const postUpVote = (id, vote) => dispatch => (
   votePost(id, vote).then(post => dispatch(setPostUpVotes(post)))
@@ -165,12 +177,5 @@ export function editComment ({ id, body }) {
     type: EDIT_COMMENT,
     id,
     body,
-  }
-}
-
-export function deleteComment ({ id }) {
-  return {
-    type: DELETE_COMMENT,
-    id,
   }
 }

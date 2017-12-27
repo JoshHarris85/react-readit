@@ -73,48 +73,22 @@ function comments (state = initialCommentsState, action) {
       return {
         ...state
       }
+    case DELETE_COMMENT:
+      return [...state].filter(comment => comment.id !== action.comment.id)
     case UP_VOTE_COMMENT:
       return [...state].map(comment => {
         if (action.comment.id == comment.id) comment.voteScore += 1;
         return comment
       })
     case DOWN_VOTE_COMMENT:
-    return [...state].map(comment => {
-      if (action.comment.id == comment.id) comment.voteScore -= 1;
-      return comment
-    })
+      return [...state].map(comment => {
+        if (action.comment.id == comment.id) comment.voteScore -= 1;
+        return comment
+      })
     default :
       return state
   }
 }
-
-// const initialCategoriesState = {
-//   name: null,
-//   url: null
-// }
-//
-// const initialPostState = {
-//   id: null,
-//   timestamp: Date.now(),
-//   title: null,
-//   body: null,
-//   author: null,
-//   category: null,
-//   voteScore: 1,
-//   deleted: false
-// }
-//
-//
-// const initialCommentState = {
-//   id: null,
-//   parentId: null,
-//   timestamp: Date.now(),
-//   body: null,
-//   author: null,
-//   voteScore: 1,
-//   deleted: false,
-//   parentDeleted: null
-// }
 
 export default combineReducers({
   posts,

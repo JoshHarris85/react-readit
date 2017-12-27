@@ -8,6 +8,7 @@ import { capitalize } from 'lodash';
 import { fetchPostComments } from '../actions/actions';
 import NewComment from './NewComment';
 import { commentUpVote, commentDownVote } from '../actions/actions';
+import DeleteComment from './DeleteComment';
 
 class Comments extends Component {
   componentWillMount() {
@@ -17,7 +18,7 @@ class Comments extends Component {
     const { comments } = this.props
     return (
       <div>
-        <h2 className={ comments.length > 1 ? "Comment-Header" : "hidden" }>Comments:</h2>
+        <h2 className={ comments.length >= 1 ? "Comment-Header" : "hidden" }>Comments:</h2>
         { !comments.deleted && comments.map(comment =>
           <div className="Comment-Container" key={comment.id}>
             <div className="Comment-Voting-Container">
@@ -28,6 +29,7 @@ class Comments extends Component {
             <div className="Comment-Body">
               {comment.body}
             </div>
+            <DeleteComment id={comment.id}/>
             <div className="Comment-By">
               submitted at <Moment unix format="MM/DD/YYYY HH:mm">{comment.timestamp}</Moment> by <b>{comment.author}</b>
             </div>
