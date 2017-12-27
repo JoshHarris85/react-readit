@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { capitalize } from 'lodash';
 import { postUpVote, postDownVote } from '../actions/actions';
 import NewPost from './NewPost';
+import SortSelect from './SortSelect';
 
 class Posts extends Component {
   filteredPosts = () => {
@@ -23,6 +24,7 @@ class Posts extends Component {
     let filteredPosts = this.filteredPosts();
     return (
       <div className="Posts-Container">
+        <SortSelect />
         {posts && !posts.deleted && filteredPosts.map(post =>
           <div className="Post-Container" key={post.id}>
             <div className="Post-Voting-Container">

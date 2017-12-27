@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { orderBy } from 'lodash';
 
 import {
   RECEIVE_CATEGORIES,
@@ -6,10 +7,11 @@ import {
   ADD_CREATED_POST,
   UP_VOTE_POST,
   DOWN_VOTE_POST,
-  UP_VOTE_COMMENT,
-  DOWN_VOTE_COMMENT,
   EDIT_POST,
   DELETE_POST,
+  SORT_POSTS,
+  UP_VOTE_COMMENT,
+  DOWN_VOTE_COMMENT,
   RECEIVE_POST_COMMENTS,
   ADD_COMMENT,
   VOTE_COMMENT,
@@ -47,6 +49,13 @@ function posts (state = initialPostsState, action) {
         if (action.post.id == post.id) post.voteScore -= 1;
         return post
       })
+      case SORT_POSTS:
+        switch(action.sort){
+          case 'score ascending': return orderBy([...state], ['voteScore'], ['asc']);
+          case 'score descending': return orderBy([...state], ['voteScore'], ['desc']);
+          case 'time ascending': return orderBy([...state], ['timestamp'], ['asc']);
+          case 'time descending': return orderBy([...state], ['timestamp'], ['desc']);
+        }
     default :
       return state
   }

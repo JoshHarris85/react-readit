@@ -21,6 +21,10 @@ ul {
   font-size: 1.5em;
 }
 
+.Posts-Container {
+  width: 100%;
+}
+
 .Post-Container,
 .Comment-Container {
   display: flex;
@@ -125,4 +129,23 @@ ul {
 .Comment-Header {
   font-weight: bold;
   text-align: center;
+}
+
+.Sort-Button-Container {
+  width: 100%;
+  height: 30px;
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.Sort-Title {
+  font-weight: bold;
+}
+
+.Sort-Button {
+  margin-left: 10px;
+  height: 30px;
+  width: 160px;
 }

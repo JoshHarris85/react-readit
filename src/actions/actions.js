@@ -6,6 +6,7 @@ export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const ADD_CREATED_POST = 'ADD_CREATED_POST'
 export const DOWN_VOTE_POST = 'DOWN_VOTE_POST'
 export const UP_VOTE_POST = 'UP_VOTE_POST'
+export const SORT_POSTS = 'SORT_POSTS'
 export const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT'
 export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT'
 export const EDIT_POST = 'EDIT_POST'
@@ -118,6 +119,13 @@ export const setCommentDownVotes = comment => (
     comment
   }
 )
+
+export function sortPosts (sort) {
+  return {
+    type: SORT_POSTS,
+    sort
+  }
+}
 
 // Editing a post
 export function editPost ({ id, title, body }) {

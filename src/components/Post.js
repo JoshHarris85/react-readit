@@ -59,14 +59,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Post)
-
-// const initialPostState = {
-//   id: null,
-//   timestamp: Date.now(),
-//   title: null,
-//   body: null,
-//   author: null,
-//   category: null,
-//   voteScore: 1,
-//   deleted: false
-// }
