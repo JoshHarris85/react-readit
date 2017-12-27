@@ -17,7 +17,7 @@ class Comments extends Component {
     const { comments } = this.props
     return (
       <div>
-        <h2 className="Comment-Header">Comments:</h2>
+        <h2 className={ comments.length > 1 ? "Comment-Header" : "hidden" }>Comments:</h2>
         { !comments.deleted && comments.map(comment =>
           <div className="Comment-Container" key={comment.id}>
             <div className="Comment-Voting-Container">
