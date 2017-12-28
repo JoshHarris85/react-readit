@@ -59,6 +59,11 @@ function posts (state = initialPostsState, action) {
         case 'time ascending': return orderBy([...state], ['timestamp'], ['asc']);
         case 'time descending': return orderBy([...state], ['timestamp'], ['desc']);
       }
+    case EDIT_POST:
+    return [...state].map(post => {
+      if (action.post.id == post.id) return action.post
+      return post
+    })
     default :
       return state
   }

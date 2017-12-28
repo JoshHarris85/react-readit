@@ -50,14 +50,14 @@ export const votePost = (id, vote) =>
     body: JSON.stringify({ option: vote })
   }).then(res => res.json())
 
-export const updatePost = (id, post) =>
+export const updatePost = (id, title, body) =>
   fetch(`${api}/posts/${id}`, {
     method: 'PUT',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ post })
+    body: JSON.stringify({ title: title, body: body })
   }).then(res => res.json())
 
 export const deletePost = (id) =>

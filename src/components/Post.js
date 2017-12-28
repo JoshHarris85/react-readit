@@ -8,6 +8,7 @@ import { capitalize } from 'lodash';
 import { postUpVote, postDownVote } from '../actions/actions';
 import Comments from './Comments';
 import DeletePost from './DeletePost';
+import EditPost from './EditPost';
 
 class Post extends Component {
   filteredPost = () => {
@@ -32,6 +33,7 @@ class Post extends Component {
                   {post.title}
                 </Link>
               </div>
+              <EditPost post={post}/>
               <DeletePost id={post.id}/>
               <div className="Posted-By">
                 submitted at <Moment unix format="MM/DD/YYYY HH:mm">{post.timestamp}</Moment> by <b>{post.author}</b> to <b>{post.category}</b>

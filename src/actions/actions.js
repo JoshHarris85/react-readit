@@ -1,5 +1,16 @@
-import { getCategories, getPosts, votePost, createPost, getPostComments, voteComment, deletePost, deleteComment, createComment } from '../utils/ReadableAPI'
 import uuidv4 from 'uuid/v4';
+import {
+  getCategories,
+  getPosts,
+  votePost,
+  createPost,
+  getPostComments,
+  voteComment,
+  deletePost,
+  deleteComment,
+  createComment,
+  updatePost
+} from '../utils/ReadableAPI'
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
@@ -153,15 +164,17 @@ export function sortPosts (sort) {
   }
 }
 
-// Editing a post
-export function editPost ({ id, title, body }) {
-  return {
+// Creating downvotes on a comment
+export const editPost = (post) => dispatch => (
+  updatePost(post.id, post.title, post.body).then(post => dispatch(setEdittedPost(post)))
+)
+
+export const setEdittedPost = post => (
+  {
     type: EDIT_POST,
-    id,
-    title,
-    body,
+    post
   }
-}
+)
 
 // Creating comments
 export const addComment = (comment) => dispatch => (
