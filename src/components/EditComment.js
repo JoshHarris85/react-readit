@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
-import { editPost } from '../actions/actions';
+import { editComment } from '../actions/actions';
 
 const customStyles = {
   overlay : {
@@ -29,13 +29,13 @@ const customStyles = {
   }
 };
 
-class EditPost extends Component {
+class EditComment extends Component {
   state = {
     modalIsOpen: false,
     form: {
-      id: this.props.post.id,
-      title: this.props.post.title,
-      body: this.props.post.body
+      id: this.props.comment.id,
+      timestamp: Date.now(),
+      body: this.props.comment.body
     }
   };
 
@@ -56,7 +56,7 @@ class EditPost extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.editPost(this.state.form)
+    this.props.editComment(this.state.form)
     this.closeModal()
   };
 
@@ -66,11 +66,11 @@ class EditPost extends Component {
   }
 
   render() {
-    const { post } = this.props
+    const { comment } = this.props
     return (
       <div>
-        <button className="Edit-Post" onClick={this.openModal}>
-          Edit Post
+        <button className="Edit-Comment" onClick={this.openModal}>
+          Edit Comment
         </button>
 
         <Modal
@@ -83,24 +83,7 @@ class EditPost extends Component {
           <form>
             <div className="Modal-Input-Container">
               <label>Author:</label>
-              {post.author}
-            </div>
-
-            <div className="Modal-Input-Container">
-              <label>Category:</label>
-              {post.category}
-            </div>
-
-            <div className="Modal-Input-Container">
-              <label htmlFor="modal-title">Title:</label>
-              <input
-                id="modal-title"
-                name="title"
-                type="text"
-                defaultValue={post.title}
-                ref={(input) => this.input = input}
-                onChange={this.update}
-              />
+              {comment.author}
             </div>
 
             <div className="Modal-Input-Container">
@@ -108,7 +91,7 @@ class EditPost extends Component {
               <textarea rows={5} cols={40}
                 id="modal-body"
                 name="body"
-                defaultValue={post.body}
+                defaultValue={comment.body}
                 ref={(input) => this.input = input}
                 onChange={this.update}
               />
@@ -124,10 +107,10 @@ class EditPost extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  editPost: (post) => dispatch(editPost(post))
+  editComment: (comment) => dispatch(editComment(comment))
 });
 
 export default connect(
   null,
   mapDispatchToProps
-)(EditPost)
+)(EditComment)

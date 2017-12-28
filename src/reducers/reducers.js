@@ -60,10 +60,10 @@ function posts (state = initialPostsState, action) {
         case 'time descending': return orderBy([...state], ['timestamp'], ['desc']);
       }
     case EDIT_POST:
-    return [...state].map(post => {
-      if (action.post.id == post.id) return action.post
-      return post
-    })
+      return [...state].map(post => {
+        if (action.post.id == post.id) return action.post
+        return post
+      })
     default :
       return state
   }
@@ -87,6 +87,11 @@ function comments (state = initialCommentsState, action) {
     case DOWN_VOTE_COMMENT:
       return [...state].map(comment => {
         if (action.comment.id == comment.id) comment.voteScore -= 1;
+        return comment
+      })
+    case EDIT_COMMENT:
+      return [...state].map(comment => {
+        if (action.comment.id == comment.id) return action.comment
         return comment
       })
     default :

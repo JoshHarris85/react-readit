@@ -9,7 +9,8 @@ import {
   deletePost,
   deleteComment,
   createComment,
-  updatePost
+  updatePost,
+  updateComment
 } from '../utils/ReadableAPI'
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
@@ -164,7 +165,7 @@ export function sortPosts (sort) {
   }
 }
 
-// Creating downvotes on a comment
+// Editting Posts
 export const editPost = (post) => dispatch => (
   updatePost(post.id, post.title, post.body).then(post => dispatch(setEdittedPost(post)))
 )
@@ -173,6 +174,18 @@ export const setEdittedPost = post => (
   {
     type: EDIT_POST,
     post
+  }
+)
+
+// Editting Comments
+export const editComment = (comment) => dispatch => (
+  updateComment(comment.id, comment.timestamp, comment.body).then(comment => dispatch(setEdittedComment(comment)))
+)
+
+export const setEdittedComment = comment => (
+  {
+    type: EDIT_COMMENT,
+    comment
   }
 )
 
@@ -195,11 +208,3 @@ export const addCreatedComment = comment => (
     comment
   }
 )
-
-export function editComment ({ id, body }) {
-  return {
-    type: EDIT_COMMENT,
-    id,
-    body,
-  }
-}

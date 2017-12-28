@@ -9,6 +9,7 @@ import { fetchPostComments } from '../actions/actions';
 import NewComment from './NewComment';
 import { commentUpVote, commentDownVote } from '../actions/actions';
 import DeleteComment from './DeleteComment';
+import EditComment from './EditComment';
 
 class Comments extends Component {
   componentWillMount() {
@@ -29,6 +30,7 @@ class Comments extends Component {
             <div className="Comment-Body">
               {comment.body}
             </div>
+            <EditComment comment={comment}/>
             <DeleteComment id={comment.id}/>
             <div className="Comment-By">
               submitted at <Moment unix format="MM/DD/YYYY HH:mm">{comment.timestamp}</Moment> by <b>{comment.author}</b>
