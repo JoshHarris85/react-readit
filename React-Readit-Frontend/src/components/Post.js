@@ -35,6 +35,9 @@ class Post extends Component {
                   {post.body}
                 </div>
               </div>
+              <div className="Post-Comments">
+                Comments: {post.commentCount}
+              </div>
               <div className="Post-Right-Flex">
                 <div className="Post-Buttons">
                   <EditPost post={post}/>

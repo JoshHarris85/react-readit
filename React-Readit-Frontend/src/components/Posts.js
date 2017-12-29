@@ -8,6 +8,8 @@ import { capitalize } from 'lodash';
 import { postUpVote, postDownVote } from '../actions/actions';
 import NewPost from './NewPost';
 import SortSelect from './SortSelect';
+import DeletePost from './DeletePost';
+import EditPost from './EditPost';
 
 class Posts extends Component {
   filteredPosts = () => {
@@ -39,12 +41,16 @@ class Posts extends Component {
               </Link>
             </div>
             <div className="Post-Comments">
-              <Link to={`/${capitalize(post.category)}/${post.id}`} className="Post-Links">
-                Comments: {post.commentCount}
-              </Link>
+              Comments: {post.commentCount}
             </div>
-            <div className="Posted-By">
-              submitted at <Moment format="MM/DD/YYYY HH:mm">{post.timestamp}</Moment> by <b>{post.author}</b> to <b>{post.category}</b>
+            <div className="Post-Right-Flex">
+              <div className="Post-Buttons">
+                <EditPost post={post}/>
+                <DeletePost id={post.id}/>
+              </div>
+              <div className="Posted-By">
+                submitted at <Moment format="MM/DD/YYYY HH:mm">{post.timestamp}</Moment> by <b>{post.author}</b> to <b>{post.category}</b>
+              </div>
             </div>
           </div>
         )}
