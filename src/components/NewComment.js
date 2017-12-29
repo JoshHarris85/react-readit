@@ -73,7 +73,7 @@ class NewComment extends Component {
     const { categories } = this.props
     return (
       <div>
-        <button className="New-Post" onClick={this.openModal}>
+        <button className="New-Comment" onClick={this.openModal}>
           Create Comment
         </button>
 

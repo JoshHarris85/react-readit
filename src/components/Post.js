@@ -33,10 +33,14 @@ class Post extends Component {
                   {post.title}
                 </Link>
               </div>
-              <EditPost post={post}/>
-              <DeletePost id={post.id}/>
-              <div className="Posted-By">
-                submitted at <Moment unix format="MM/DD/YYYY HH:mm">{post.timestamp}</Moment> by <b>{post.author}</b> to <b>{post.category}</b>
+              <div className="Post-Right-Flex">
+                <div className="Post-Buttons">
+                  <EditPost post={post}/>
+                  <DeletePost id={post.id}/>
+                </div>
+                <div className="Posted-By">
+                  submitted at <Moment unix format="MM/DD/YYYY HH:mm">{post.timestamp}</Moment> by <b>{post.author}</b> to <b>{post.category}</b>
+                </div>
               </div>
             </div>
             <Comments id={post.id} />

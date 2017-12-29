@@ -9,8 +9,8 @@ class DeletePost extends Component {
 
   render() {
     return (
-      <div className="Post-Delete-Container">
-        <button className="Post-Delete-Button" onClick={this.handleDelete}>
+      <div className="Delete-Post-Container">
+        <button className="Delete-Post" onClick={this.handleDelete}>
           Delete Post
         </button>
       </div>

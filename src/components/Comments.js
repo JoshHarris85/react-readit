@@ -30,10 +30,14 @@ class Comments extends Component {
             <div className="Comment-Body">
               {comment.body}
             </div>
-            <EditComment comment={comment}/>
-            <DeleteComment id={comment.id}/>
-            <div className="Comment-By">
-              submitted at <Moment unix format="MM/DD/YYYY HH:mm">{comment.timestamp}</Moment> by <b>{comment.author}</b>
+            <div className="Comment-Right-Flex">
+              <div className="Comment-Buttons">
+                <EditComment comment={comment}/>
+                <DeleteComment id={comment.id}/>
+              </div>
+              <div className="Comment-By">
+                submitted at <Moment unix format="MM/DD/YYYY HH:mm">{comment.timestamp}</Moment> by <b>{comment.author}</b>
+              </div>
             </div>
           </div>
           )}

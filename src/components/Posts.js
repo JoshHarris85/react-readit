@@ -38,7 +38,6 @@ class Posts extends Component {
                 {post.title}
               </Link>
             </div>
-            <DeletePost id={post.id}/>
             <div className="Post-Comments">
               <Link to={`/${capitalize(post.category)}/${post.id}`} className="Post-Links">
                 Comments: {post.commentCount}

@@ -68,7 +68,7 @@ class EditPost extends Component {
   render() {
     const { post } = this.props
     return (
-      <div>
+      <div className="Edit-Post-Container">
         <button className="Edit-Post" onClick={this.openModal}>
           Edit Post
         </button>
