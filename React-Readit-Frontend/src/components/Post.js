@@ -28,10 +28,13 @@ class Post extends Component {
                 <p>{post.voteScore}</p>
                 <FontAwesomeIcon icon={faArrowDown} onClick={() => this.props.postDownVote(post.id, 'downVote')}/>
               </div>
-              <div className="Post-Title">
-                <Link to={`/${capitalize(post.category)}/${post.id}`} className="Post-Links">
+              <div className="Post-Middle-Flex">
+                <div className="Post-Title">
                   {post.title}
-                </Link>
+                </div>
+                <div className="Post-Body">
+                  {post.body}
+                </div>
               </div>
               <div className="Post-Right-Flex">
                 <div className="Post-Buttons">

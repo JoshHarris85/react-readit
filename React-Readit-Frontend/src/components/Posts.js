@@ -33,7 +33,7 @@ class Posts extends Component {
               <p>{post.voteScore}</p>
               <FontAwesomeIcon icon={faArrowDown} onClick={() => this.props.postDownVote(post.id, 'downVote')}/>
             </div>
-            <div className="Post-Title">
+            <div className="Posts-Title">
               <Link to={`/${capitalize(post.category)}/${post.id}`} className="Post-Links">
                 {post.title}
               </Link>
