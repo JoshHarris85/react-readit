@@ -1,22 +1,6 @@
 import { combineReducers } from 'redux';
 import { orderBy } from 'lodash';
-
-import {
-  RECEIVE_CATEGORIES,
-  RECEIVE_POSTS,
-  CREATE_POST,
-  DELETE_POST,
-  UP_VOTE_POST,
-  DOWN_VOTE_POST,
-  SORT_POSTS,
-  EDIT_POST,
-  RECEIVE_COMMENTS,
-  CREATE_COMMENT,
-  DELETE_COMMENT,
-  UP_VOTE_COMMENT,
-  DOWN_VOTE_COMMENT,
-  EDIT_COMMENT,
-} from '../actions/actions';
+import * as type from '../actions/actions'
 
 const initialCategoriesState = [];
 const initialPostsState = [];
@@ -24,7 +8,7 @@ const initialCommentsState = [];
 
 function categories (state = initialCategoriesState, action) {
   switch (action.type) {
-    case RECEIVE_CATEGORIES:
+    case type.RECEIVE_CATEGORIES:
       return action.categories;
     default :
       return state;
@@ -33,23 +17,23 @@ function categories (state = initialCategoriesState, action) {
 
 function posts (state = initialPostsState, action) {
   switch (action.type) {
-    case RECEIVE_POSTS:
+    case type.RECEIVE_POSTS:
       return action.posts;
-    case CREATE_POST:
+    case type.CREATE_POST:
       return [...state, action.post];
-    case DELETE_POST:
+    case type.DELETE_POST:
       return [...state].filter(post => post.id !== action.post.id);
-    case UP_VOTE_POST:
+    case type.UP_VOTE_POST:
       return [...state].map(post => {
       	if (action.post.id === post.id) post.voteScore += 1;
         return post;
       });
-    case DOWN_VOTE_POST:
+    case type.DOWN_VOTE_POST:
       return [...state].map(post => {
         if (action.post.id === post.id) post.voteScore -= 1;
         return post;
       });
-    case SORT_POSTS:
+    case type.SORT_POSTS:
       switch(action.sort) {
         case 'score ascending': return orderBy([...state], ['voteScore'], ['asc']);
         case 'score descending': return orderBy([...state], ['voteScore'], ['desc']);
@@ -57,7 +41,7 @@ function posts (state = initialPostsState, action) {
         case 'time descending': return orderBy([...state], ['timestamp'], ['desc']);
         default: return state;
       }
-    case EDIT_POST:
+    case type.EDIT_POST:
       return [...state].map(post => {
         if (action.post.id === post.id) return action.post;
         return post;
@@ -69,23 +53,23 @@ function posts (state = initialPostsState, action) {
 
 function comments (state = initialCommentsState, action) {
   switch (action.type) {
-    case RECEIVE_COMMENTS:
+    case type.RECEIVE_COMMENTS:
       return action.comments;
-    case CREATE_COMMENT:
+    case type.CREATE_COMMENT:
       return [...state, action.comment];
-    case DELETE_COMMENT:
+    case type.DELETE_COMMENT:
       return [...state].filter(comment => comment.id !== action.comment.id);
-    case UP_VOTE_COMMENT:
+    case type.UP_VOTE_COMMENT:
       return [...state].map(comment => {
         if (action.comment.id === comment.id) comment.voteScore += 1;
         return comment;
       });
-    case DOWN_VOTE_COMMENT:
+    case type.DOWN_VOTE_COMMENT:
       return [...state].map(comment => {
         if (action.comment.id === comment.id) comment.voteScore -= 1;
         return comment;
       });
-    case EDIT_COMMENT:
+    case type.EDIT_COMMENT:
       return [...state].map(comment => {
         if (action.comment.id === comment.id) return action.comment;
         return comment;

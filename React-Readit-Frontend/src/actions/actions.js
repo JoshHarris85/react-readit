@@ -1,17 +1,5 @@
 import uuidv4 from 'uuid/v4';
-import {
-  getCategories,
-  getPosts,
-  createPost,
-  votePost,
-  deletePost,
-  updatePost,
-  getPostComments,
-  voteComment,
-  deleteComment,
-  createComment,
-  updateComment
-} from '../utils/ReadableAPI';
+import * as API from '../utils/ReadableAPI'
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
@@ -30,7 +18,7 @@ export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT';
 
 // Getting initial categories
 export const fetchCategories = () => dispatch => (
-  getCategories().then(categories => dispatch(receiveCategories(categories)))
+  API.getCategories().then(categories => dispatch(receiveCategories(categories)))
 );
 
 export const receiveCategories = categories => (
@@ -42,7 +30,7 @@ export const receiveCategories = categories => (
 
 // Getting initial posts
 export const fetchPosts = () => dispatch => (
-  getPosts().then(posts => dispatch(receivePosts(posts)))
+  API.getPosts().then(posts => dispatch(receivePosts(posts)))
 );
 
 export const receivePosts = posts => (
@@ -54,7 +42,7 @@ export const receivePosts = posts => (
 
 // Getting comments for specific post
 export const fetchPostComments = (id) => dispatch => (
-  getPostComments(id).then(comments => dispatch(receiveComments(comments)))
+  API.getPostComments(id).then(comments => dispatch(receiveComments(comments)))
 );
 
 export const receiveComments = comments => (
@@ -66,16 +54,16 @@ export const receiveComments = comments => (
 
 // Creating posts
 export const addPost = (post) => dispatch => (
-  createPost(
-              {
-                id: uuidv4(),
-                timestamp: Date.now(),
-                title: post.title,
-                body: post.body,
-                author: post.author,
-                category: post.category
-              }
-            ).then(post => dispatch(addCreatedPost(post)))
+  API.createPost(
+                  {
+                    id: uuidv4(),
+                    timestamp: Date.now(),
+                    title: post.title,
+                    body: post.body,
+                    author: post.author,
+                    category: post.category
+                  }
+                ).then(post => dispatch(addCreatedPost(post)))
 );
 
 export const addCreatedPost = post => (
@@ -87,7 +75,7 @@ export const addCreatedPost = post => (
 
 // Delete post
 export const removePost = (id) => dispatch => (
-  deletePost(id).then(post => dispatch(removeDeletedPost(post)))
+  API.deletePost(id).then(post => dispatch(removeDeletedPost(post)))
 );
 
 export const removeDeletedPost = post => (
@@ -99,7 +87,7 @@ export const removeDeletedPost = post => (
 
 // Creating upvotes on a post
 export const postUpVote = (id, vote) => dispatch => (
-  votePost(id, vote).then(post => dispatch(setPostUpVotes(post)))
+  API.votePost(id, vote).then(post => dispatch(setPostUpVotes(post)))
 );
 
 export const setPostUpVotes = post => (
@@ -111,7 +99,7 @@ export const setPostUpVotes = post => (
 
 // Creating downvotes on a post
 export const postDownVote = (id, vote) => dispatch => (
-  votePost(id, vote).then(post => dispatch(setPostDownVotes(post)))
+  API.votePost(id, vote).then(post => dispatch(setPostDownVotes(post)))
 );
 
 export const setPostDownVotes = post => (
@@ -123,7 +111,7 @@ export const setPostDownVotes = post => (
 
 // Editting Posts
 export const editPost = (post) => dispatch => (
-  updatePost(post.id, post.title, post.body).then(post => dispatch(setEdittedPost(post)))
+  API.updatePost(post.id, post.title, post.body).then(post => dispatch(setEdittedPost(post)))
 );
 
 export const setEdittedPost = post => (
@@ -143,7 +131,7 @@ export function sortPosts (sort) {
 
 // Editting Comments
 export const editComment = (comment) => dispatch => (
-  updateComment(comment.id, comment.timestamp, comment.body).then(comment => dispatch(setEdittedComment(comment)))
+  API.updateComment(comment.id, comment.timestamp, comment.body).then(comment => dispatch(setEdittedComment(comment)))
 );
 
 export const setEdittedComment = comment => (
@@ -155,15 +143,15 @@ export const setEdittedComment = comment => (
 
 // Creating comments
 export const addComment = (comment) => dispatch => (
-  createComment(
-                 {
-                   id: uuidv4(),
-                   timestamp: Date.now(),
-                   body: comment.body,
-                   author: comment.author,
-                   parentId: comment.parentId
-                 }
-               ).then(comment => dispatch(addCreatedComment(comment)))
+  API.createComment(
+                     {
+                       id: uuidv4(),
+                       timestamp: Date.now(),
+                       body: comment.body,
+                       author: comment.author,
+                       parentId: comment.parentId
+                     }
+                   ).then(comment => dispatch(addCreatedComment(comment)))
 );
 
 export const addCreatedComment = comment => (
@@ -175,7 +163,7 @@ export const addCreatedComment = comment => (
 
 // Creating upvotes on a comment
 export const commentUpVote = (id, vote) => dispatch => (
-  voteComment(id, vote).then(comment => dispatch(setCommentUpVotes(comment)))
+  API.voteComment(id, vote).then(comment => dispatch(setCommentUpVotes(comment)))
 );
 
 export const setCommentUpVotes = comment => (
@@ -187,7 +175,7 @@ export const setCommentUpVotes = comment => (
 
 // Creating downvotes on a comment
 export const commentDownVote = (id, vote) => dispatch => (
-  voteComment(id, vote).then(comment => dispatch(setCommentDownVotes(comment)))
+  API.voteComment(id, vote).then(comment => dispatch(setCommentDownVotes(comment)))
 );
 
 export const setCommentDownVotes = comment => (
@@ -199,7 +187,7 @@ export const setCommentDownVotes = comment => (
 
 // Delete comment
 export const removeComment = (id) => dispatch => (
-  deleteComment(id).then(comment => dispatch(removeDeletedComment(comment)))
+  API.deleteComment(id).then(comment => dispatch(removeDeletedComment(comment)))
 );
 
 export const removeDeletedComment = comment => (
