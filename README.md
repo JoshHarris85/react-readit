@@ -6,9 +6,13 @@ The application is a reddit clone that allows you to create posts, create commen
 edit posts, edit comments, vote on comments, and vote on posts.
 
 ## Installation
-* API server
-`npm install` within React-Readit-API/api-server directory to install dependencies.
-`node server` within React-Readit-API/api-server directory to start the api server.
-* frontend (Open Another Terminal Window)
-`npm install` within React-Readit-API/React-Readit-Frontend directory to install dependencies.
-`npm start` within React-Readit-API/React-Readit-Frontend directory to start the app on localhost.
+* Install and start API server
+    - `cd React-Readit/React-Readit-API/api-server`
+    - `npm install`
+    - `node server`
+* In another terminal window, install and start the frontend app
+    - `cd React-Readit/React-Readit-Frontend`
+    - `npm install`
+    - `npm start`
+
+You will now find an instance of the application running on your localhost.
