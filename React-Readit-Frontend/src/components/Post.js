@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faArrowUp, faArrowDown } from '@fortawesome/fontawesome-free-solid'
 import Moment from 'react-moment';
-import { Link } from 'react-router-dom';
-import { capitalize } from 'lodash';
 import { postUpVote, postDownVote } from '../actions/actions';
 import Comments from './Comments';
 import DeletePost from './DeletePost';
@@ -42,7 +40,7 @@ class Post extends Component {
                   <DeletePost id={post.id}/>
                 </div>
                 <div className="Posted-By">
-                  submitted at <Moment unix format="MM/DD/YYYY HH:mm">{post.timestamp}</Moment> by <b>{post.author}</b> to <b>{post.category}</b>
+                  submitted at <Moment format="MM/DD/YYYY HH:mm">{post.timestamp}</Moment> by <b>{post.author}</b> to <b>{post.category}</b>
                 </div>
               </div>
             </div>

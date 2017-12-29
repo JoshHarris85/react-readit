@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faArrowUp, faArrowDown } from '@fortawesome/fontawesome-free-solid'
 import Moment from 'react-moment';
-import { Link } from 'react-router-dom';
-import { capitalize } from 'lodash';
 import { fetchPostComments } from '../actions/actions';
 import NewComment from './NewComment';
 import { commentUpVote, commentDownVote } from '../actions/actions';
@@ -36,7 +34,7 @@ class Comments extends Component {
                 <DeleteComment id={comment.id}/>
               </div>
               <div className="Comment-By">
-                submitted at <Moment unix format="MM/DD/YYYY HH:mm">{comment.timestamp}</Moment> by <b>{comment.author}</b>
+                submitted at <Moment format="MM/DD/YYYY HH:mm">{comment.timestamp}</Moment> by <b>{comment.author}</b>
               </div>
             </div>
           </div>

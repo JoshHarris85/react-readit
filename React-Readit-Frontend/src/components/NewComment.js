@@ -70,7 +70,6 @@ class NewComment extends Component {
   }
 
   render() {
-    const { categories } = this.props
     return (
       <div>
         <button className="New-Comment" onClick={this.openModal}>
@@ -117,15 +116,11 @@ class NewComment extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  categories: state.categories
-});
-
 const mapDispatchToProps = (dispatch) => ({
   addComment: (title, body, author, category) => dispatch(addComment(title, body, author, category))
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(NewComment)

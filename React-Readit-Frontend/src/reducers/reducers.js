@@ -14,8 +14,6 @@ import {
   UP_VOTE_COMMENT,
   DOWN_VOTE_COMMENT,
   RECEIVE_POST_COMMENTS,
-  ADD_COMMENT,
-  VOTE_COMMENT,
   EDIT_COMMENT,
   DELETE_COMMENT,
 } from '../actions/actions'
@@ -34,7 +32,6 @@ function categories (state = initialCategoriesState, action) {
 }
 
 function posts (state = initialPostsState, action) {
-  const { title, body, author, category, id, form } = action
   switch (action.type) {
     case RECEIVE_POSTS:
       return action.posts
@@ -44,12 +41,12 @@ function posts (state = initialPostsState, action) {
       return [...state].filter(post => post.id !== action.post.id)
     case UP_VOTE_POST:
       return [...state].map(post => {
-      	if (action.post.id == post.id) post.voteScore += 1;
+      	if (action.post.id === post.id) post.voteScore += 1;
         return post
       })
     case DOWN_VOTE_POST:
       return [...state].map(post => {
-        if (action.post.id == post.id) post.voteScore -= 1;
+        if (action.post.id === post.id) post.voteScore -= 1;
         return post
       })
     case SORT_POSTS:
@@ -58,10 +55,11 @@ function posts (state = initialPostsState, action) {
         case 'score descending': return orderBy([...state], ['voteScore'], ['desc']);
         case 'time ascending': return orderBy([...state], ['timestamp'], ['asc']);
         case 'time descending': return orderBy([...state], ['timestamp'], ['desc']);
+        default: return state;
       }
     case EDIT_POST:
       return [...state].map(post => {
-        if (action.post.id == post.id) return action.post
+        if (action.post.id === post.id) return action.post
         return post
       })
     default :
@@ -70,8 +68,6 @@ function posts (state = initialPostsState, action) {
 }
 
 function comments (state = initialCommentsState, action) {
-  const { title, body, author, category } = action
-
   switch (action.type) {
     case RECEIVE_POST_COMMENTS:
       return action.comments
@@ -81,17 +77,17 @@ function comments (state = initialCommentsState, action) {
       return [...state].filter(comment => comment.id !== action.comment.id)
     case UP_VOTE_COMMENT:
       return [...state].map(comment => {
-        if (action.comment.id == comment.id) comment.voteScore += 1;
+        if (action.comment.id === comment.id) comment.voteScore += 1;
         return comment
       })
     case DOWN_VOTE_COMMENT:
       return [...state].map(comment => {
-        if (action.comment.id == comment.id) comment.voteScore -= 1;
+        if (action.comment.id === comment.id) comment.voteScore -= 1;
         return comment
       })
     case EDIT_COMMENT:
       return [...state].map(comment => {
-        if (action.comment.id == comment.id) return action.comment
+        if (action.comment.id === comment.id) return action.comment
         return comment
       })
     default :
