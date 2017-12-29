@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import { faArrowUp, faArrowDown } from '@fortawesome/fontawesome-free-solid'
+import { connect } from 'react-redux';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faArrowUp, faArrowDown } from '@fortawesome/fontawesome-free-solid';
 import Moment from 'react-moment';
 import { fetchPostComments } from '../actions/actions';
 import NewComment from './NewComment';
@@ -11,7 +11,7 @@ import EditComment from './EditComment';
 
 class Comments extends Component {
   componentWillMount() {
-    if(this.props.id) this.props.fetchPostComments(this.props.id)
+    if(this.props.id) this.props.fetchPostComments(this.props.id);
   }
   render() {
     const { comments } = this.props
@@ -44,7 +44,7 @@ class Comments extends Component {
         </div>
         <NewComment parentId={this.props.id}/>
       </div>
-    )
+    );
   }
 }
 
@@ -61,4 +61,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Comments)
+)(Comments);

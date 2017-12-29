@@ -29,7 +29,7 @@ class SortSelect extends Component {
           </option>
         </select>
       </div>
-    )
+    );
   }
 }
 
@@ -40,4 +40,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   null,
   mapDispatchToProps
-)(SortSelect)
+)(SortSelect);

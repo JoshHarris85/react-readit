@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import { faArrowUp, faArrowDown } from '@fortawesome/fontawesome-free-solid'
+import { connect } from 'react-redux';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faArrowUp, faArrowDown } from '@fortawesome/fontawesome-free-solid';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { capitalize } from 'lodash';
@@ -11,16 +11,17 @@ import SortSelect from './SortSelect';
 
 class Posts extends Component {
   filteredPosts = () => {
-    if(this.props.posts && this.props.match && this.props.match.params && this.props.match.params.category){
+    if(this.props.posts && this.props.match && this.props.match.params && this.props.match.params.category) {
       let category = this.props.match.params.category;
-      return this.props.posts.filter(post => capitalize(post.category) === capitalize(category))
+      return this.props.posts.filter(post => capitalize(post.category) === capitalize(category));
     }
     else {
-      return this.props.posts
+      return this.props.posts;
     }
   }
+
   render() {
-    const { posts } = this.props
+    const { posts } = this.props;
     let filteredPosts = this.filteredPosts();
     return (
       <div className="Posts-Container">
@@ -52,7 +53,7 @@ class Posts extends Component {
         </div>
         <NewPost/>
       </div>
-    )
+    );
   }
 }
 
@@ -68,4 +69,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Posts)
+)(Posts);

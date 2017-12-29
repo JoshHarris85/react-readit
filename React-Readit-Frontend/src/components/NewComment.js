@@ -60,8 +60,8 @@ class NewComment extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.addComment(this.state.form)
-    this.closeModalAndClear()
+    this.props.addComment(this.state.form);
+    this.closeModalAndClear();
   };
 
   // React-Modal requirement for screen readers
@@ -123,4 +123,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   null,
   mapDispatchToProps
-)(NewComment)
+)(NewComment);

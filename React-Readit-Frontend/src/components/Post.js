@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import { faArrowUp, faArrowDown } from '@fortawesome/fontawesome-free-solid'
+import { connect } from 'react-redux';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faArrowUp, faArrowDown } from '@fortawesome/fontawesome-free-solid';
 import Moment from 'react-moment';
 import { postUpVote, postDownVote } from '../actions/actions';
 import Comments from './Comments';
@@ -14,6 +14,7 @@ class Post extends Component {
       return this.props.posts.filter(post => post.id === this.props.match.params.id && !post.deleted)
     }
   }
+
   render() {
     let filteredPost = this.filteredPost();
     return (
@@ -51,7 +52,7 @@ class Post extends Component {
           No Post Found
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -67,4 +68,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Post)
+)(Post);

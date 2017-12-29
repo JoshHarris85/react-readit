@@ -61,8 +61,8 @@ class NewPost extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.addPost(this.state.form)
-    this.closeModalAndClear()
+    this.props.addPost(this.state.form);
+    this.closeModalAndClear();
   };
 
   // React-Modal requirement for screen readers
@@ -71,7 +71,7 @@ class NewPost extends Component {
   }
 
   render() {
-    const { categories } = this.props
+    const { categories } = this.props;
     return (
       <div>
         <button className="New-Post" onClick={this.openModal}>
@@ -158,4 +158,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(NewPost)
+)(NewPost);

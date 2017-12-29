@@ -56,9 +56,9 @@ class EditComment extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.editComment(this.state.form)
-    this.closeModal()
-  };
+    this.props.editComment(this.state.form);
+    this.closeModal();
+  }
 
   // React-Modal requirement for screen readers
   componentWillMount() {
@@ -113,4 +113,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   null,
   mapDispatchToProps
-)(EditComment)
+)(EditComment);

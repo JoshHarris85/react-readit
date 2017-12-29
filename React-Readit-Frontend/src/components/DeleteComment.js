@@ -14,7 +14,7 @@ class DeleteComment extends Component {
           Delete Comment
         </button>
       </div>
-    )
+    );
   }
 }
 
@@ -25,4 +25,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   null,
   mapDispatchToProps
-)(DeleteComment)
+)(DeleteComment);

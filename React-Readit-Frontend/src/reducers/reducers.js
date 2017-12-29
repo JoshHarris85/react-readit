@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 import { orderBy } from 'lodash';
 
 import {
@@ -16,41 +16,41 @@ import {
   UP_VOTE_COMMENT,
   DOWN_VOTE_COMMENT,
   EDIT_COMMENT,
-} from '../actions/actions'
+} from '../actions/actions';
 
-const initialCategoriesState = []
-const initialPostsState = []
-const initialCommentsState = []
+const initialCategoriesState = [];
+const initialPostsState = [];
+const initialCommentsState = [];
 
 function categories (state = initialCategoriesState, action) {
   switch (action.type) {
     case RECEIVE_CATEGORIES:
-      return action.categories
+      return action.categories;
     default :
-      return state
+      return state;
   }
 }
 
 function posts (state = initialPostsState, action) {
   switch (action.type) {
     case RECEIVE_POSTS:
-      return action.posts
+      return action.posts;
     case CREATE_POST:
-      return [...state, action.post]
+      return [...state, action.post];
     case DELETE_POST:
-      return [...state].filter(post => post.id !== action.post.id)
+      return [...state].filter(post => post.id !== action.post.id);
     case UP_VOTE_POST:
       return [...state].map(post => {
       	if (action.post.id === post.id) post.voteScore += 1;
-        return post
-      })
+        return post;
+      });
     case DOWN_VOTE_POST:
       return [...state].map(post => {
         if (action.post.id === post.id) post.voteScore -= 1;
-        return post
-      })
+        return post;
+      });
     case SORT_POSTS:
-      switch(action.sort){
+      switch(action.sort) {
         case 'score ascending': return orderBy([...state], ['voteScore'], ['asc']);
         case 'score descending': return orderBy([...state], ['voteScore'], ['desc']);
         case 'time ascending': return orderBy([...state], ['timestamp'], ['asc']);
@@ -59,39 +59,39 @@ function posts (state = initialPostsState, action) {
       }
     case EDIT_POST:
       return [...state].map(post => {
-        if (action.post.id === post.id) return action.post
-        return post
-      })
+        if (action.post.id === post.id) return action.post;
+        return post;
+      });
     default :
-      return state
+      return state;
   }
 }
 
 function comments (state = initialCommentsState, action) {
   switch (action.type) {
     case RECEIVE_COMMENTS:
-      return action.comments
+      return action.comments;
     case CREATE_COMMENT:
-      return [...state, action.comment]
+      return [...state, action.comment];
     case DELETE_COMMENT:
-      return [...state].filter(comment => comment.id !== action.comment.id)
+      return [...state].filter(comment => comment.id !== action.comment.id);
     case UP_VOTE_COMMENT:
       return [...state].map(comment => {
         if (action.comment.id === comment.id) comment.voteScore += 1;
-        return comment
-      })
+        return comment;
+      });
     case DOWN_VOTE_COMMENT:
       return [...state].map(comment => {
         if (action.comment.id === comment.id) comment.voteScore -= 1;
-        return comment
-      })
+        return comment;
+      });
     case EDIT_COMMENT:
       return [...state].map(comment => {
-        if (action.comment.id === comment.id) return action.comment
-        return comment
-      })
+        if (action.comment.id === comment.id) return action.comment;
+        return comment;
+      });
     default :
-      return state
+      return state;
   }
 }
 
@@ -99,4 +99,4 @@ export default combineReducers({
   posts,
   comments,
   categories,
-})
+});

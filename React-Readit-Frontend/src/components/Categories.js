@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { orderBy, capitalize } from 'lodash';
 import { Link } from 'react-router-dom';
 
 class Categories extends Component {
   render() {
-    const { categories } = this.props
+    const { categories } = this.props;
     return (
       <ul className="Nav-Links">
         {orderBy(categories, 'name').map(category =>
@@ -16,7 +16,7 @@ class Categories extends Component {
           </li>
         )}
       </ul>
-    )
+    );
   }
 }
 
@@ -26,4 +26,4 @@ const mapStateToProps = (state, props) => ({
 
 export default connect(
   mapStateToProps
-)(Categories)
+)(Categories);

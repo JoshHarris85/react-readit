@@ -56,8 +56,8 @@ class EditPost extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.editPost(this.state.form)
-    this.closeModal()
+    this.props.editPost(this.state.form);
+    this.closeModal();
   };
 
   // React-Modal requirement for screen readers
@@ -130,4 +130,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   null,
   mapDispatchToProps
-)(EditPost)
+)(EditPost);
