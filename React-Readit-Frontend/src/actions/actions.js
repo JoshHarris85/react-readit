@@ -2,30 +2,29 @@ import uuidv4 from 'uuid/v4';
 import {
   getCategories,
   getPosts,
-  votePost,
   createPost,
+  votePost,
+  deletePost,
+  updatePost,
   getPostComments,
   voteComment,
-  deletePost,
   deleteComment,
   createComment,
-  updatePost,
   updateComment
 } from '../utils/ReadableAPI'
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
-export const ADD_CREATED_POST = 'ADD_CREATED_POST'
+export const CREATE_POST = 'CREATE_POST'
 export const DOWN_VOTE_POST = 'DOWN_VOTE_POST'
 export const UP_VOTE_POST = 'UP_VOTE_POST'
+export const DELETE_POST = 'DELETE_POST'
+export const EDIT_POST = 'EDIT_POST'
 export const SORT_POSTS = 'SORT_POSTS'
+export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
+export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT'
 export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT'
-export const EDIT_POST = 'EDIT_POST'
-export const DELETE_POST = 'DELETE_POST'
-export const RECEIVE_POST_COMMENTS = 'RECEIVE_POST_COMMENTS'
-export const ADD_CREATED_COMMENT = 'ADD_CREATED_COMMENT'
-export const VOTE_COMMENT = 'VOTE_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 
@@ -55,12 +54,12 @@ export const receivePosts = posts => (
 
 // Getting comments for specific post
 export const fetchPostComments = (id) => dispatch => (
-  getPostComments(id).then(comments => dispatch(receivePostComments(comments)))
+  getPostComments(id).then(comments => dispatch(receiveComments(comments)))
 )
 
-export const receivePostComments = comments => (
+export const receiveComments = comments => (
   {
-    type: RECEIVE_POST_COMMENTS,
+    type: RECEIVE_COMMENTS,
     comments
   }
 )
@@ -81,7 +80,7 @@ export const addPost = (post) => dispatch => (
 
 export const addCreatedPost = post => (
   {
-    type: ADD_CREATED_POST,
+    type: CREATE_POST,
     post
   }
 )
@@ -95,18 +94,6 @@ export const removeDeletedPost = post => (
   {
     type: DELETE_POST,
     post
-  }
-)
-
-// Delete comment
-export const removeComment = (id) => dispatch => (
-  deleteComment(id).then(comment => dispatch(removeDeletedComment(comment)))
-)
-
-export const removeDeletedComment = comment => (
-  {
-    type: DELETE_COMMENT,
-    comment
   }
 )
 
@@ -134,37 +121,6 @@ export const setPostDownVotes = post => (
   }
 )
 
-// Creating upvotes on a comment
-export const commentUpVote = (id, vote) => dispatch => (
-  voteComment(id, vote).then(comment => dispatch(setCommentUpVotes(comment)))
-)
-
-export const setCommentUpVotes = comment => (
-  {
-    type: UP_VOTE_COMMENT,
-    comment
-  }
-)
-// Creating downvotes on a comment
-export const commentDownVote = (id, vote) => dispatch => (
-  voteComment(id, vote).then(comment => dispatch(setCommentDownVotes(comment)))
-)
-
-export const setCommentDownVotes = comment => (
-  {
-    type: DOWN_VOTE_COMMENT,
-    comment
-  }
-)
-
-// Sorting posts
-export function sortPosts (sort) {
-  return {
-    type: SORT_POSTS,
-    sort
-  }
-}
-
 // Editting Posts
 export const editPost = (post) => dispatch => (
   updatePost(post.id, post.title, post.body).then(post => dispatch(setEdittedPost(post)))
@@ -176,6 +132,14 @@ export const setEdittedPost = post => (
     post
   }
 )
+
+// Sorting posts
+export function sortPosts (sort) {
+  return {
+    type: SORT_POSTS,
+    sort
+  }
+}
 
 // Editting Comments
 export const editComment = (comment) => dispatch => (
@@ -204,7 +168,43 @@ export const addComment = (comment) => dispatch => (
 
 export const addCreatedComment = comment => (
   {
-    type: ADD_CREATED_COMMENT,
+    type: CREATE_COMMENT,
+    comment
+  }
+)
+
+// Creating upvotes on a comment
+export const commentUpVote = (id, vote) => dispatch => (
+  voteComment(id, vote).then(comment => dispatch(setCommentUpVotes(comment)))
+)
+
+export const setCommentUpVotes = comment => (
+  {
+    type: UP_VOTE_COMMENT,
+    comment
+  }
+)
+
+// Creating downvotes on a comment
+export const commentDownVote = (id, vote) => dispatch => (
+  voteComment(id, vote).then(comment => dispatch(setCommentDownVotes(comment)))
+)
+
+export const setCommentDownVotes = comment => (
+  {
+    type: DOWN_VOTE_COMMENT,
+    comment
+  }
+)
+
+// Delete comment
+export const removeComment = (id) => dispatch => (
+  deleteComment(id).then(comment => dispatch(removeDeletedComment(comment)))
+)
+
+export const removeDeletedComment = comment => (
+  {
+    type: DELETE_COMMENT,
     comment
   }
 )

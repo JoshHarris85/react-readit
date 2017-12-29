@@ -7,7 +7,7 @@ class Categories extends Component {
   render() {
     const { categories } = this.props
     return (
-      <ul>
+      <ul className="Nav-Links">
         {orderBy(categories, 'name').map(category =>
           <li key={capitalize(category.name)}>
             <Link to={`/${category.path}`} className="Nav-Links">

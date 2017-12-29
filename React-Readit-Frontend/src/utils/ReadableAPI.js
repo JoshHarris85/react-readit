@@ -36,10 +36,6 @@ export const createPost = (post) =>
     body: JSON.stringify(post)
   }).then(res => res.json())
 
-export const getPost = (id) =>
-  fetch(`${api}/post/${id}`, { headers })
-    .then(res => res.json())
-
 export const votePost = (id, vote) =>
   fetch(`${api}/posts/${id}`, {
     method: 'POST',
@@ -83,10 +79,6 @@ export const createComment = (comment) =>
     },
     body: JSON.stringify(comment)
   }).then(res => res.json())
-
-export const getComment = (id) =>
-  fetch(`${api}/comments/${id}`, { headers })
-    .then(res => res.json())
 
 export const voteComment = (id, vote) =>
   fetch(`${api}/comments/${id}`, {

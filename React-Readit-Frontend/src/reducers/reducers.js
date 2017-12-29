@@ -4,18 +4,18 @@ import { orderBy } from 'lodash';
 import {
   RECEIVE_CATEGORIES,
   RECEIVE_POSTS,
-  ADD_CREATED_POST,
-  ADD_CREATED_COMMENT,
+  CREATE_POST,
+  DELETE_POST,
   UP_VOTE_POST,
   DOWN_VOTE_POST,
-  EDIT_POST,
-  DELETE_POST,
   SORT_POSTS,
+  EDIT_POST,
+  RECEIVE_COMMENTS,
+  CREATE_COMMENT,
+  DELETE_COMMENT,
   UP_VOTE_COMMENT,
   DOWN_VOTE_COMMENT,
-  RECEIVE_POST_COMMENTS,
   EDIT_COMMENT,
-  DELETE_COMMENT,
 } from '../actions/actions'
 
 const initialCategoriesState = []
@@ -35,7 +35,7 @@ function posts (state = initialPostsState, action) {
   switch (action.type) {
     case RECEIVE_POSTS:
       return action.posts
-    case ADD_CREATED_POST:
+    case CREATE_POST:
       return [...state, action.post]
     case DELETE_POST:
       return [...state].filter(post => post.id !== action.post.id)
@@ -69,9 +69,9 @@ function posts (state = initialPostsState, action) {
 
 function comments (state = initialCommentsState, action) {
   switch (action.type) {
-    case RECEIVE_POST_COMMENTS:
+    case RECEIVE_COMMENTS:
       return action.comments
-    case ADD_CREATED_COMMENT:
+    case CREATE_COMMENT:
       return [...state, action.comment]
     case DELETE_COMMENT:
       return [...state].filter(comment => comment.id !== action.comment.id)

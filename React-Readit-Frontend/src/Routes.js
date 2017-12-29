@@ -18,7 +18,7 @@ class Router extends Component {
       <BrowserRouter>
         <div>
           <header className="App-header">
-            <Link to={`/`} className="Nav-Links">
+            <Link to={`/`} className="Nav-Header">
               <h1 className="App-title">React Readit</h1>
             </Link>
             <Categories/>

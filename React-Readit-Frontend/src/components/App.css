@@ -1,4 +1,4 @@
-ul {
+.Nav-Links {
     list-style-type: none;
     display: flex;
     justify-content: space-between;
@@ -73,11 +73,13 @@ ul {
   font-size: 130%;
 }
 
+.Nav-Header,
 .Nav-Links {
   text-decoration: none;
   color: white;
 }
 
+.Nav-Header:hover,
 .Nav-Links:hover {
   color: #b1abab;
 }
