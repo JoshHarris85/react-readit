@@ -5,6 +5,8 @@ This is the second project for the Udacity React Nanodegree program.
 The application is a reddit clone that allows you to create posts, create comments,
 edit posts, edit comments, vote on comments, and vote on posts.
 
+You can view this site live here: http://reddit.joshuamharris.com/
+
 ## Installation
 * Install and start API server
     - `cd React-Readit/React-Readit-API/api-server`
